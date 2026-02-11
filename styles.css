@@ -192,6 +192,11 @@ body {
   transform: translateY(1px) scale(0.992);
 }
 
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .btn:focus-visible,
 .speed-pill:focus-visible,
 .text-input:focus-visible {

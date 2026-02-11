@@ -178,6 +178,7 @@ function togglePlayPause() {
 }
 
 function handleNextSentence() {
+  if (state.speaking && !state.paused) return;
   if (!state.text.trim()) return;
   const baseChar = textInput.selectionStart ?? state.cursorIntent;
   const idx = state.speaking ? state.sentenceIndex + 1 : sentenceIndexForChar(baseChar) + 1;
@@ -186,6 +187,7 @@ function handleNextSentence() {
 }
 
 function handlePreviousSentence() {
+  if (state.speaking && !state.paused) return;
   if (!state.text.trim()) return;
   const now = Date.now();
   const quickDoubleBack = now - state.lastBackAt < 560;
@@ -401,6 +403,15 @@ function stopCurrentUtterance() {
 
 function updatePlayButton() {
   playPauseBtn.textContent = state.speaking && !state.paused ? "Pause" : "Play";
+  updateSkipButtons();
+}
+
+function updateSkipButtons() {
+  const locked = state.speaking && !state.paused;
+  prevBtn.disabled = locked;
+  nextBtn.disabled = locked;
+  prevBtn.setAttribute("aria-disabled", String(locked));
+  nextBtn.setAttribute("aria-disabled", String(locked));
 }
 
 function renderHighlight(range = null) {
