@@ -223,10 +223,8 @@ body {
 }
 
 .play-btn {
-  position: relative;
   font-size: 1.16rem;
   font-weight: 620;
-  overflow: visible;
 }
 
 .action-btn {
@@ -278,20 +276,9 @@ body {
 }
 
 @media (max-width: 680px) {
-  html,
-  body {
-    background:
-      radial-gradient(70vmax 60vmax at 10% 6%, rgba(255, 255, 255, 0.66), transparent 60%),
-      radial-gradient(72vmax 64vmax at 90% 95%, rgba(169, 202, 244, 0.55), transparent 66%),
-      linear-gradient(168deg, var(--bg-top), var(--bg-bottom));
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100%;
-  }
-
   .app {
     width: 100%;
-    max-width: none;
+    max-width: 430px;
     min-height: 100svh;
     padding-left: 16px;
     padding-right: 16px;
