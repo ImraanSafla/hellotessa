@@ -419,8 +419,7 @@ function updateSkipButtons() {
 }
 
 function isPlaybackLocked() {
-  const engineSpeaking = state.speechReady && !state.paused && speechSynthesis.speaking && !speechSynthesis.paused;
-  return (state.speaking && !state.paused) || engineSpeaking;
+  return state.speaking && !state.paused;
 }
 
 function guardSkipPointerDown(event) {
