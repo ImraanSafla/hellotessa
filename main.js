@@ -61,6 +61,8 @@ function wireEvents() {
   textInput.addEventListener("paste", onNativePaste);
 
   playPauseBtn.addEventListener("click", togglePlayPause);
+  prevBtn.addEventListener("pointerdown", guardSkipPointerDown);
+  nextBtn.addEventListener("pointerdown", guardSkipPointerDown);
   prevBtn.addEventListener("click", handlePreviousSentence);
   nextBtn.addEventListener("click", handleNextSentence);
   pasteClearBtn.addEventListener("click", handlePasteClear);
@@ -413,11 +415,18 @@ function updateSkipButtons() {
   nextBtn.disabled = locked;
   prevBtn.setAttribute("aria-disabled", String(locked));
   nextBtn.setAttribute("aria-disabled", String(locked));
+  appEl.classList.toggle("skip-locked", locked);
 }
 
 function isPlaybackLocked() {
   const engineSpeaking = state.speechReady && speechSynthesis.speaking && !speechSynthesis.paused;
   return (state.speaking && !state.paused) || engineSpeaking;
+}
+
+function guardSkipPointerDown(event) {
+  if (!isPlaybackLocked()) return;
+  event.preventDefault();
+  event.stopPropagation();
 }
 
 function renderHighlight(range = null) {
