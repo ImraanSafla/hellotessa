@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HelloTessa</title>
+    <meta
+      name="description"
+      content="Tessa is a free, lightweight text-to-speech reader built for instant playback."
+    />
+    <meta property="og:title" content="HelloTessa" />
+    <meta property="og:description" content="Tessa is a free, lightweight text-to-speech reader built for instant playback." />
+    <meta property="twitter:title" content="HelloTessa" />
+    <meta property="twitter:description" content="Tessa is a free, lightweight text-to-speech reader built for instant playback." />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app" id="app">
+      <header class="title-wrap">
+        <h1 class="title">TESSA</h1>
+      </header>
+
+      <section class="text-shell glass-panel" aria-label="Text input and reading area">
+        <div class="highlight-layer" id="highlightLayer" aria-hidden="true"></div>
+        <textarea
+          id="textInput"
+          class="text-input"
+          spellcheck="false"
+          placeholder="Begin listening, paste to get started..."
+          aria-label="Text to speech input"
+        ></textarea>
+      </section>
+
+      <section class="controls primary-controls" aria-label="Primary controls">
+        <button id="prevBtn" class="btn glass-btn icon-btn" type="button" aria-label="Previous sentence">
+          <svg
+            class="btn-icon-svg"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+        <button id="playPauseBtn" class="btn glass-btn play-btn" type="button" aria-label="Play or pause">
+          Play
+        </button>
+        <button id="nextBtn" class="btn glass-btn icon-btn" type="button" aria-label="Next sentence">
+          <svg
+            class="btn-icon-svg"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+        <button id="pasteClearBtn" class="btn glass-btn action-btn" type="button" aria-label="Paste text">
+          Paste
+        </button>
+      </section>
+
+      <section class="controls secondary-controls" aria-label="Playback speed and word count">
+        <div class="speed-pills glass-panel" id="speedPills" role="radiogroup" aria-label="Playback speed">
+          <button type="button" class="speed-pill" data-speed="1" role="radio" aria-checked="false">1x</button>
+          <button type="button" class="speed-pill" data-speed="1.2" role="radio" aria-checked="false">1.2x</button>
+          <button type="button" class="speed-pill active" data-speed="1.5" role="radio" aria-checked="true">1.5x</button>
+          <button type="button" class="speed-pill" data-speed="1.8" role="radio" aria-checked="false">1.8x</button>
+          <button type="button" class="speed-pill" data-speed="2" role="radio" aria-checked="false">2x</button>
+        </div>
+        <p class="word-count" id="wordCount">0 words</p>
+      </section>
+    </main>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
