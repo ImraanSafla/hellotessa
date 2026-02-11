@@ -42,6 +42,7 @@ function boot() {
   }
   wireEvents();
   updateFromText("");
+  updateSkipButtons();
   mirrorScroll();
   primeVoices();
 }
@@ -178,7 +179,7 @@ function togglePlayPause() {
 }
 
 function handleNextSentence() {
-  if (state.speaking && !state.paused) return;
+  if (isPlaybackLocked()) return;
   if (!state.text.trim()) return;
   const baseChar = textInput.selectionStart ?? state.cursorIntent;
   const idx = state.speaking ? state.sentenceIndex + 1 : sentenceIndexForChar(baseChar) + 1;
@@ -187,7 +188,7 @@ function handleNextSentence() {
 }
 
 function handlePreviousSentence() {
-  if (state.speaking && !state.paused) return;
+  if (isPlaybackLocked()) return;
   if (!state.text.trim()) return;
   const now = Date.now();
   const quickDoubleBack = now - state.lastBackAt < 560;
@@ -407,11 +408,16 @@ function updatePlayButton() {
 }
 
 function updateSkipButtons() {
-  const locked = state.speaking && !state.paused;
+  const locked = isPlaybackLocked();
   prevBtn.disabled = locked;
   nextBtn.disabled = locked;
   prevBtn.setAttribute("aria-disabled", String(locked));
   nextBtn.setAttribute("aria-disabled", String(locked));
+}
+
+function isPlaybackLocked() {
+  const engineSpeaking = state.speechReady && speechSynthesis.speaking && !speechSynthesis.paused;
+  return (state.speaking && !state.paused) || engineSpeaking;
 }
 
 function renderHighlight(range = null) {
